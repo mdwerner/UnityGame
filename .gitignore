@@ -1,3 +1,15 @@
+#Unneeded Unity Files
+Executable_Data
+Library
+obj
+Packages
+UnityPackageManager
+Executable
+Assembly-CSharp
+UnityPlayer.dll
+TestGame*
+
+
 # Windows thumbnail cache files
 Thumbs.db
 ehthumbs.db
