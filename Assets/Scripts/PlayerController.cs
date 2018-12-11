@@ -8,12 +8,14 @@ public class PlayerController : MonoBehaviour {
 
     private Rigidbody2D player;
     private SpriteRenderer spriteRenderer;
+    private Animator animator;
     private bool movingLeft;
     private bool movingRight;
 
     private void Start(){
         player = GetComponent<Rigidbody2D> ();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
         movingRight = true;
         movingLeft = false;
     }//end Start() 
@@ -23,9 +25,21 @@ public class PlayerController : MonoBehaviour {
         Vector3 orig_pos = this.transform.position;
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
+        if( moveHorizontal == 0 && moveVertical == 0)
+        {
+            animator.SetFloat("Speed", 0);
+            return;
+        }//end if
 
-        float newX = orig_pos.x + moveHorizontal * speed;
-        float newY = orig_pos.y + moveVertical * speed;
+        float h_speed = moveHorizontal * speed;
+        float v_speed = moveVertical * speed;
+
+        float newX = orig_pos.x + h_speed;
+        float newY = orig_pos.y + v_speed;
+
+        animator.SetFloat("Speed", Mathf.Abs(h_speed));
+        Debug.Log("Setting animator Speed to = " + h_speed);
+
 
         player.MovePosition(new Vector2(newX, newY));
                    
